@@ -1023,14 +1023,12 @@ JS;
         ));
 
         $script = <<<'JS'
-(function (element) {
-    var event = document.createEvent("HTMLEvents");
+var event = document.createEvent("HTMLEvents");
 
-    event.initEvent("dragstart", true, true);
-    event.dataTransfer = {};
+event.initEvent("dragstart", true, true);
+event.dataTransfer = {};
 
-    element.dispatchEvent(event);
-}({{ELEMENT}}));
+{{ELEMENT}}.dispatchEvent(event);
 JS;
         $this->executeJsOnElement($source, $script);
 
@@ -1043,14 +1041,12 @@ JS;
         $this->wdSession->buttonup();
 
         $script = <<<'JS'
-(function (element) {
-    var event = document.createEvent("HTMLEvents");
+var event = document.createEvent("HTMLEvents");
 
-    event.initEvent("drop", true, true);
-    event.dataTransfer = {};
+event.initEvent("drop", true, true);
+event.dataTransfer = {};
 
-    element.dispatchEvent(event);
-}({{ELEMENT}}));
+{{ELEMENT}}.dispatchEvent(event);
 JS;
         $this->executeJsOnElement($destination, $script);
     }
