@@ -889,14 +889,9 @@ JS;
     }
 
     /**
-     * {@inheritdoc}
+     * @return void
      */
-    public function click($xpath)
-    {
-        $this->clickOnElement($this->findElement($xpath));
-    }
-
-    private function clickOnElement(Element $element)
+    protected function mouseOverElement(Element $element)
     {
         try {
             // Move the mouse to the element as Selenium does not allow clicking on an element which is outside the viewport
@@ -906,6 +901,19 @@ JS;
         } catch (UnknownError $e) {
             // Chromium driver sends back UnknownError (WebDriver\Exception with code 13)
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function click($xpath)
+    {
+        $this->clickOnElement($this->findElement($xpath));
+    }
+
+    private function clickOnElement(Element $element)
+    {
+        $this->mouseOverElement($element);
 
         $element->click();
     }
@@ -915,7 +923,8 @@ JS;
      */
     public function doubleClick($xpath)
     {
-        $this->mouseOver($xpath);
+        $this->mouseOverElement($this->findElement($xpath));
+
         $this->wdSession->doubleclick();
     }
 
@@ -924,7 +933,8 @@ JS;
      */
     public function rightClick($xpath)
     {
-        $this->mouseOver($xpath);
+        $this->mouseOverElement($this->findElement($xpath));
+
         $this->wdSession->click(array('button' => 2));
     }
 
@@ -962,9 +972,7 @@ JS;
      */
     public function mouseOver($xpath)
     {
-        $this->wdSession->moveto(array(
-            'element' => $this->findElement($xpath)->getID()
-        ));
+        $this->mouseOverElement($this->findElement($xpath));
     }
 
     /**
@@ -1018,9 +1026,7 @@ JS;
         $source      = $this->findElement($sourceXpath);
         $destination = $this->findElement($destinationXpath);
 
-        $this->wdSession->moveto(array(
-            'element' => $source->getID()
-        ));
+        $this->mouseOverElement($source);
 
         $script = <<<'JS'
 var event = document.createEvent("HTMLEvents");
@@ -1034,9 +1040,7 @@ JS;
 
         $this->wdSession->buttondown();
         if ($destination->getID() !== $source->getID()) {
-            $this->wdSession->moveto(array(
-                'element' => $destination->getID()
-            ));
+            $this->mouseOverElement($destination);
         }
         $this->wdSession->buttonup();
 
