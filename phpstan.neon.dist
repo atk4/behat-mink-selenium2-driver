@@ -1,0 +1,23 @@
+includes:
+    - phar://phpstan.phar/conf/bleedingEdge.neon
+
+parameters:
+    level: 6
+    paths:
+        - .
+    excludePaths:
+        - vendor
+        - tests
+    ignoreErrors:
+        - '~^Method Behat\\Mink\\Driver\\Selenium2Driver::\w+\(\) has no return type specified.~'
+        - '~^(Property .+ has|Method .+\(\) (has parameter \$.+ with|return type has)) no value type specified in iterable type .+\.~'
+
+        -
+            message: '~^Strict comparison using !== between null and string will always evaluate to true\.$~'
+            path: 'src/Selenium2Driver.php'
+            count: 1
+
+        -
+            message: '~^Call to an undefined method WebDriver\\Session::file\(\)\.$~'
+            path: 'src/Selenium2Driver.php'
+            count: 1

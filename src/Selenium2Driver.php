@@ -51,7 +51,7 @@ class Selenium2Driver extends CoreDriver
 
     /**
      * The WebDriverSession instance
-     * @var \WebDriver\Session
+     * @var \WebDriver\Session|null
      */
     private $wdSession;
 
@@ -479,6 +479,8 @@ class Selenium2Driver extends CoreDriver
                 return urldecode($cookie['value']);
             }
         }
+
+        return null;
     }
 
     /**
@@ -1165,8 +1167,8 @@ JS;
     }
 
     /**
-     * @param $xpath
-     * @param $event
+     * @param string $xpath
+     * @param string $event
      * @param string $options
      */
     private function trigger($xpath, $event, $options = '{}')

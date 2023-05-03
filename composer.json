@@ -27,7 +27,8 @@
     "require-dev": {
         "mink/driver-testsuite": "dev-master",
         "phpunit/phpunit": "^8.5.22 || ^9.5.11",
-        "symfony/error-handler": "^4.4 || ^5.0"
+        "symfony/error-handler": "^4.4 || ^5.0",
+        "phpstan/phpstan": "^1.10"
     },
 
     "replace": {

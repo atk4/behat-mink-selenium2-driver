@@ -71,3 +71,24 @@ jobs:
           name: logs_php-${{ matrix.php }}
           path: |
             logs
+
+  phpstan:
+    name: Phpstan
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          tools: composer
+
+      - name: Install dependencies
+        run: |
+          composer update --no-interaction --prefer-dist
+
+      - name: Run phpstan
+        run: |
+          vendor/bin/phpstan analyse
