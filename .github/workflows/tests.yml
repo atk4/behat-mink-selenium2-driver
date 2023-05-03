@@ -59,6 +59,7 @@ jobs:
           vendor/bin/phpunit -v --coverage-clover=coverage.xml
 
       - name: Upload coverage
+        if: false
         uses: codecov/codecov-action@v2
         with:
           files: coverage.xml

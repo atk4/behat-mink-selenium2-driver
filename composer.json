@@ -1,5 +1,5 @@
 {
-    "name":         "behat/mink-selenium2-driver",
+    "name":         "atk4/behat-mink-selenium2-driver",
     "description":  "Selenium2 (WebDriver) driver for Mink framework",
     "keywords":     ["selenium", "webdriver", "javascript", "ajax", "testing", "browser"],
     "homepage":     "https://mink.behat.org/",
@@ -28,6 +28,10 @@
         "mink/driver-testsuite": "dev-master",
         "phpunit/phpunit": "^8.5.22 || ^9.5.11",
         "symfony/error-handler": "^4.4 || ^5.0"
+    },
+
+    "replace": {
+        "behat/mink-selenium2-driver": "*"
     },
 
     "autoload": {
