@@ -2190,6 +2190,8 @@ define('syn/key', [
                     syn.trigger(this, 'click', {});
                 }
             },
+            'escape': function () {
+            },
             '\t': function (options, scope) {
                 var focusEls = getFocusable(this), current = null, i = 0, el, firstNotIndexed, orders = [];
                 for (; i < focusEls.length; i++) {
